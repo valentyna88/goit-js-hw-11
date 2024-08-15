@@ -18,7 +18,23 @@ const searchFormEl = document.querySelector('.js-search-form');
 const onSearchFormSubmit = event => {
   event.preventDefault();
 
-  console.dir(searchFormEl);
+  const searchedValue = searchFormEl.elements.user_query.value;
+
+  fetch(
+    `https://pixabay.com/api/?key=45452240-d9bf2a206a145f9e2645b735d&q=${searchedValue}&orientation=horizontal`
+  )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
