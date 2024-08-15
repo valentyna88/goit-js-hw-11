@@ -1,13 +1,5 @@
 @import url('./common.css');
 
-.container {
-  width: 1200px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .search-form {
   width: 371px;
   display: flex;
