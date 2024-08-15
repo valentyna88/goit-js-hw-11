@@ -46,11 +46,28 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  width: 1134px;
+  justify-content: center;
 }
 
-.gallery-card {
-  width: calc((100% - 48px) / 3);
+.image-container {
+  position: relative;
+  border: 1px solid #808080;
 }
+
+.gallery-info-list {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 360px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+}
+
+/* .gallery-card {
+  width: calc((100% - 48px) / 3);
+} */
 
 .gallery-img {
   width: 100%;
