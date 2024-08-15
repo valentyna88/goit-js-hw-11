@@ -1,1 +1,36 @@
 @import url('./common.css');
+
+.container {
+  width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-form {
+  width: 371px;
+  display: flex;
+  margin: 36px auto 32px;
+}
+
+.search-input {
+  height: 40px;
+  padding-left: 16px;
+  flex-grow: 1;
+  font-size: 18px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #808080;
+}
+
+.search-btn {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background-color: #4e75ff;
+  color: #ffffff;
+  margin-left: 8px;
+}
