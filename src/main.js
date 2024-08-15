@@ -10,11 +10,35 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
 
-const createGalleryCardTemplate = () => {
+const createGalleryCardTemplate = imgInfo => {
   return `
-  <li class="gallery-card">
-    <img class="gallery-img" src="" alt="" />
-  </li>
+    <div class="image-container">
+      <li class="gallery-card">
+        <div class="image-viewer">
+          <a class="gallery-link" href="${imgInfo.largeImageURL}">
+            <img class="gallery-image" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" />
+          </a>
+        </div>
+        <ul class="gallery-info-list">
+          <li class="gallery-info-item">
+            <h3>Likes</h3>
+            <p>${imgInfo.likes}</p>
+          </li>
+          <li class="gallery-info-item">
+            <h3>Views</h3>
+            <p>${imgInfo.views}</p>
+          </li>
+          <li class="gallery-info-item">
+            <h3>Comments</h3>
+            <p>${imgInfo.comments}</p>
+          </li>
+          <li class="gallery-info-item">
+            <h3>Downloads</h3>
+            <p>${imgInfo.downloads}</p>
+          </li>
+        </ul>
+      </li>
+    </div>
   `;
 };
 
@@ -34,6 +58,11 @@ const onSearchFormSubmit = event => {
     })
     .then(data => {
       console.log(data);
+
+      const galleryCardsTemplate = data.hits
+        .map(imgDetails => createGalleryCardTemplate(imgDetails))
+        .join('');
+      galleryEl.innerHTML = galleryCardsTemplate;
     })
     .catch(err => {
       console.log(err);
