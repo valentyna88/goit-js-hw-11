@@ -8,30 +8,49 @@ import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
 
 const searchFormEl = document.querySelector('.js-search-form');
-const galleryEl = document.querySelector('.js-gallery');
-searchFormEl.addEventListener('submit', onSearchFormSubmit);
+const loader = document.querySelector('.loader');
+let lightbox;
 
-const lightBox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  overlayOpacity: 0.8,
-});
-
-function onSearchFormSubmit(event) {
+searchFormEl.addEventListener('submit', function (event) {
   event.preventDefault();
-}
 
-// const onSearchFormSubmit = event => {
-//   event.preventDefault();
+  const query = event.target.elements.user_query.value.trim();
 
-//   const searchedValue = searchFormEl.elements.user_query.value;
+  if (query === '') {
+    iziToast.error({
+      title: 'Error',
+      message: 'Please enter a search term.',
+    });
+    return;
+  }
 
-//       const galleryCardsTemplate = data.hits
-//         .map(imgDetails => createGalleryCardTemplate(imgDetails))
-//         .join('');
-//       galleryEl.innerHTML = galleryCardsTemplate;
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
+  loader.style.display = 'block';
+
+  fetchImages(query)
+    .then(data => {
+      if (data.hits.length === 0) {
+        iziToast.warning({
+          title: 'No Results',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
+      } else {
+        renderImages(data.hits);
+        if (lightbox) {
+          lightbox.refresh();
+        } else {
+          lightbox = new SimpleLightbox('.gallery a');
+        }
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      iziToast.error({
+        title: 'Error',
+        message: 'Failed to fetch images. Please try again later.',
+      });
+    })
+    .finally(() => {
+      loader.style.display = 'none';
+    });
+});
