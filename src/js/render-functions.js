@@ -1,5 +1,7 @@
 export function renderImages(images) {
   const gallery = document.querySelector('.js-gallery');
+  gallery.innerHTML = '';
+
   const galleryMarkup = images
     .map(
       ({
@@ -10,14 +12,13 @@ export function renderImages(images) {
         views,
         comments,
         downloads,
-        ...info
       }) => `
     <div class="image-container">
       <li class="gallery-item">
         <div class="image-viewer">
           <a class="gallery-link" href="${largeImageURL}">
-            <img class="gallery-image" src="${webformatURL}" alt="${tags}"
-          /></a>
+            <img class="gallery-image" src="${webformatURL}" alt="${tags}" loading="lazy" />
+          </a>
         </div>
         <ul class="gallery-info-list">
           <li class="gallery-info-item">
@@ -29,7 +30,7 @@ export function renderImages(images) {
             <p>${views}</p>
           </li>
           <li class="gallery-info-item">
-            <h3>Comment</h3>
+            <h3>Comments</h3>
             <p>${comments}</p>
           </li>
           <li class="gallery-info-item">
