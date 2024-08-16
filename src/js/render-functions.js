@@ -1,32 +1,40 @@
 export function renderImages(images) {
   const gallery = document.querySelector('.js-gallery');
-  gallery.innerHTML = '';
   const galleryMarkup = images
     .map(
-      image => `
+      ({
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+        ...info
+      }) => `
     <div class="image-container">
       <li class="gallery-item">
         <div class="image-viewer">
-          <a class="gallery-link" href="${image.largeImageURL}">
-            <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}"
+          <a class="gallery-link" href="${largeImageURL}">
+            <img class="gallery-image" src="${webformatURL}" alt="${tags}"
           /></a>
         </div>
         <ul class="gallery-info-list">
           <li class="gallery-info-item">
             <h3>Likes</h3>
-            <p>${image.likes}</p>
+            <p>${likes}</p>
           </li>
           <li class="gallery-info-item">
             <h3>Views</h3>
-            <p>${image.views}</p>
+            <p>${views}</p>
           </li>
           <li class="gallery-info-item">
             <h3>Comment</h3>
-            <p>${image.comments}</p>
+            <p>${comments}</p>
           </li>
           <li class="gallery-info-item">
             <h3>Downloads</h3>
-            <p>${image.downloads}</p>
+            <p>${downloads}</p>
           </li>
         </ul>
       </li>
@@ -35,7 +43,4 @@ export function renderImages(images) {
     )
     .join('');
   gallery.innerHTML = galleryMarkup;
-
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
 }
