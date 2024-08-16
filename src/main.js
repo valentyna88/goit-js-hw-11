@@ -1,9 +1,5 @@
 import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
 import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
 
@@ -24,7 +20,7 @@ searchFormEl.addEventListener('submit', function (event) {
     return;
   }
 
-  loader.style.display = 'block';
+  loader.classList.remove('is-hidden');
 
   fetchImages(query)
     .then(data => {
@@ -51,7 +47,7 @@ searchFormEl.addEventListener('submit', function (event) {
       });
     })
     .finally(() => {
-      loader.style.display = 'none';
+      loader.classList.add('is-hidden');
       event.target.reset();
     });
 });
