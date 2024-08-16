@@ -10,11 +10,9 @@ export function fetchImages(query) {
     safesearch: true,
   });
 
-  return fetch(
-    `${API_URL}?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`
-  ).then(response => {
+  return fetch(`${API_URL}?${params}`).then(response => {
     if (!response.ok) {
-      throw new Error('Failed to fetch images');
+      throw new Error(response.status);
     }
     return response.json();
   });
