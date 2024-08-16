@@ -1,5 +1,6 @@
 export function renderImages(images) {
-  const gallery = document.querySelector('.gallery');
+  const gallery = document.querySelector('.js-gallery');
+  gallery.innerHTML = '';
   const galleryMarkup = images
     .map(
       image => `
@@ -34,4 +35,7 @@ export function renderImages(images) {
     )
     .join('');
   gallery.innerHTML = galleryMarkup;
+
+  const lightbox = new SimpleLightbox('.gallery a');
+  lightbox.refresh();
 }
