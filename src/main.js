@@ -52,5 +52,6 @@ searchFormEl.addEventListener('submit', function (event) {
     })
     .finally(() => {
       loader.style.display = 'none';
+      searchFormEl.reset();
     });
 });
