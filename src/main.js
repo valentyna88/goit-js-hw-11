@@ -29,7 +29,7 @@ searchFormEl.addEventListener('submit', function (event) {
   fetchImages(query)
     .then(data => {
       if (data.hits.length === 0) {
-        iziToast.warning({
+        iziToast.error({
           title: 'No Results',
           message:
             'Sorry, there are no images matching your search query. Please try again!',
@@ -52,6 +52,6 @@ searchFormEl.addEventListener('submit', function (event) {
     })
     .finally(() => {
       loader.style.display = 'none';
-      searchFormEl.reset();
+      event.target.reset();
     });
 });
